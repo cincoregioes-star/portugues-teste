@@ -259,7 +259,7 @@
 
 <header>
   <h1>PORTUGUÊS TESTE GRÁTIS</h1>
-  <p>2 ÁREAS LIBERADAS • 10 QUESTÕES CADA • RESTANTE BLOQUEADO</p>
+  <p>TESTE: 2 ÁREAS • 10 QUESTÕES CADA • PREMIUM: 10 MÓDULOS E 200 QUESTÕES</p>
 </header>
 
 <div id="app"></div>
@@ -277,7 +277,7 @@
 </audio>
 
 <script>
-const PREMIUM_URL = "COLE_AQUI_O_LINK_DA_KIWIFY";
+const PREMIUM_URL = "https://pay.kiwify.com.br/QxRaDJy";
 
 const app = document.getElementById("app");
 const audioBg = document.getElementById("audio-bg");
@@ -370,7 +370,11 @@ const bancoQuestoes = {
 };
 
 function irParaPremium() {
-  window.location.href = PREMIUM_URL;
+  if (!PREMIUM_URL || PREMIUM_URL.includes("COLE_AQUI")) {
+    alert("Link premium não configurado.");
+    return;
+  }
+  window.open(PREMIUM_URL,"_blank","noopener");
 }
 
 function mostrarMenu() {
@@ -379,7 +383,7 @@ function mostrarMenu() {
   app.innerHTML = `
     <div class="box">
       <h2 style="color:var(--blue); margin-bottom:8px;">Escolha uma área de Português</h2>
-      <p class="mini">No teste grátis você libera <strong>2 áreas</strong>. As demais ficam bloqueadas para levar ao premium.</p>
+      <p class="mini">No teste grátis você libera <strong>2 áreas com 10 questões cada</strong>. Na versão premium você desbloqueia <strong>10 módulos e 200 questões</strong>.</p>
 
       <div class="grid-areas">
         ${areas.map(area => `
@@ -403,7 +407,7 @@ function mostrarBloqueio() {
     <div class="lock-box">
       <h2>🔒 ÁREA PREMIUM</h2>
       <p>Essa área está disponível apenas na versão completa do simulado de Português.</p>
-      <p>No premium você desbloqueia todas as áreas e continua seu treinamento completo.</p>
+      <p>No premium você desbloqueia <strong>10 módulos</strong> e <strong>200 questões completas</strong>.</p>
       <button class="btn btn-premium" onclick="irParaPremium()">LIBERAR ACESSO COMPLETO</button>
       <button class="btn btn-voltar" onclick="mostrarMenu()">VOLTAR AO MENU</button>
     </div>
@@ -492,7 +496,7 @@ function finalizarArea() {
   pararAudioFundo();
 
   const notaFinal = acertosObjetivas * 10;
-  let feedback = "";
+  let feedback = "Você concluiu uma amostra do Simulado Português ENEM. A versão premium possui 10 módulos e 200 questões.";
 
   if (notaFinal >= 80) feedback = "Ótimo resultado no teste grátis. Você já pode avançar para o premium.";
   else if (notaFinal >= 50) feedback = "Bom começo. No premium você treina o restante das áreas.";
